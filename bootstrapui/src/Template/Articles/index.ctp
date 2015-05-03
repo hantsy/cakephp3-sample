@@ -11,6 +11,7 @@ $this->start('tb_sidebar');
         <tr>
                         <th><?= $this->Paginator->sort('id'); ?></th>
                         <th><?= $this->Paginator->sort('title'); ?></th>
+                        <th><?= $this->Paginator->sort('category_id'); ?></th>
                         <th><?= $this->Paginator->sort('created'); ?></th>
                         <th><?= $this->Paginator->sort('modified'); ?></th>
                         <th class="actions"><?= __('Actions'); ?></th>
@@ -21,6 +22,7 @@ $this->start('tb_sidebar');
         <tr>
                         <td><?= $this->Number->format($article->id) ?></td>
                                     <td><?= h($article->title) ?></td>
+                                    <td><?= h($article->category_id) ?></td>
                                     <td><?= h($article->created) ?></td>
                                     <td><?= h($article->modified) ?></td>
                                     <td class="actions">

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use App\Model\Entity\Article;
@@ -10,8 +11,7 @@ use Cake\Validation\Validator;
 /**
  * Articles Model
  */
-class ArticlesTable extends Table
-{
+class ArticlesTable extends Table {
 
     /**
      * Initialize method
@@ -19,12 +19,16 @@ class ArticlesTable extends Table
      * @param array $config The configuration for the Table.
      * @return void
      */
-    public function initialize(array $config)
-    {
+    public function initialize(array $config) {
         $this->table('articles');
         $this->displayField('title');
         $this->primaryKey('id');
         $this->addBehavior('Timestamp');
+
+        // Just add the belongsTo relation with CategoriesTable
+        $this->belongsTo('Categories', [
+            'foreignKey' => 'category_id',
+        ]);
     }
 
     /**
@@ -33,14 +37,14 @@ class ArticlesTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator)
-    {
+    public function validationDefault(Validator $validator) {
         $validator
-            ->add('id', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('id', 'create')
-            ->allowEmpty('title')
-            ->allowEmpty('body');
+                ->add('id', 'valid', ['rule' => 'numeric'])
+                ->allowEmpty('id', 'create')
+                ->allowEmpty('title')
+                ->allowEmpty('body');
 
         return $validator;
     }
+
 }

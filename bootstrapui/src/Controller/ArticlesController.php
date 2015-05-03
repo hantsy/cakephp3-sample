@@ -45,6 +45,7 @@ class ArticlesController extends AppController
      */
     public function add()
     {
+        print_r($this->request->data);
         $article = $this->Articles->newEntity();
         if ($this->request->is('post')) {
             $article = $this->Articles->patchEntity($article, $this->request->data);
@@ -57,6 +58,11 @@ class ArticlesController extends AppController
         }
         $this->set(compact('article'));
         $this->set('_serialize', ['article']);
+        
+        // Just added the categories list to be able to choose
+        // one category for an article
+        $categories = $this->Articles->Categories->find('treeList');
+        $this->set(compact('categories'));
     }
 
     /**
